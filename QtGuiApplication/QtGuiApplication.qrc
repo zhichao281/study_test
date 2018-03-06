@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Image">
+        <file>Resources/Image/i_menu_eraser_d.png</file>
+    </qresource>
+</RCC>
