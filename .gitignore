@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/QtGuiApplication/GeneratedFiles
+/QtGuiApplication/x64
+/x64
+/WhiteBoard/x64
+/QWhiteBoard/GeneratedFiles
+/QWhiteBoard/x64
