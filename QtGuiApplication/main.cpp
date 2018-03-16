@@ -16,11 +16,11 @@ typedef void (*WhiteBoard)(HWND hfather, int nX, int nY, int nWidth, int nHight)
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
-#ifdef _DEBUG
-#pragma comment(lib,"E:\\study\\study_test\\x64\\Debug\\QWhiteBoard.lib")
-#else
-#pragma comment(lib,"..\\release\\LedCtrlBoard.lib")
-#endif
+//#ifdef _DEBUG
+//#pragma comment(lib,"E:\\study\\study_test\\x64\\Debug\\QWhiteBoard.lib")
+//#else
+//#pragma comment(lib,"E:\\study\\study_test\\x64\\release\\QWhiteBoard.lib")
+//#endif
 #include "mainwindows.h"
 int main(int argc, char *argv[])
 {

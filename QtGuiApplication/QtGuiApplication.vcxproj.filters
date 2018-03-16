@@ -34,6 +34,18 @@
     <Filter Include="Generated Files\Release">
       <UniqueIdentifier>{47002705-0566-4a7c-9201-7ad2b34b8b0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\HCanvas">
+      <UniqueIdentifier>{44a25cbf-59d2-4171-a61f-f5ab75252d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HCanvas">
+      <UniqueIdentifier>{2c565ede-a9a3-4adf-964c-c22ec8e3e438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ToolBar">
+      <UniqueIdentifier>{a6f96757-58ca-4c05-8339-836bf95965ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ToolBar">
+      <UniqueIdentifier>{bc41e030-b5e0-46d4-ad4f-5a0e9ed8e8f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,41 +72,68 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindows.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="rect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="line.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ellipse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Polygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="paintWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_paintWidget.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_paintWidget.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="CErase.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_TextEdit.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TextEdit.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\BaseShape.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawArrow.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawEllipse.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawErase.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawLine.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawPen.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawPolygon.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawRect.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\DrawText.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\paintWidget.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\TextEdit.cpp">
+      <Filter>Source Files\HCanvas</Filter>
+    </ClCompile>
+    <ClCompile Include="HCanvas\HCanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BaseShape.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ToolBar\ToolBarWidget.cpp">
+      <Filter>Source Files\ToolBar</Filter>
     </ClCompile>
-    <ClCompile Include="DrawText.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_HCanvas.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="TextEdit.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GeneratedFiles\Release\moc_HCanvas.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ToolBarWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ToolBarWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,43 +149,58 @@
     <CustomBuild Include="mainwindows.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="paintWidget.h">
-      <Filter>Header Files</Filter>
+    <CustomBuild Include="HCanvas\paintWidget.h">
+      <Filter>Header Files\HCanvas</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HCanvas\TextEdit.h">
+      <Filter>Header Files\HCanvas</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HCanvas\HCanvas.h">
+      <Filter>Header Files\HCanvas</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ToolBar\ToolBarWidget.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ToolBar\ToolBarWidget.h">
+      <Filter>Header Files\ToolBar</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_QtGuiApplication.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="rect.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\BaseShape.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="line.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawArrow.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="pen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawEllipse.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="ellipse.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawErase.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="Polygon.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawLine.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="type.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawPen.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="CErase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawPolygon.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="BaseShape.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawRect.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="DrawText.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\DrawText.h">
+      <Filter>Header Files\HCanvas</Filter>
     </ClInclude>
-    <ClInclude Include="TextEdit.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HCanvas\type.h">
+      <Filter>Header Files\HCanvas</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_ToolBarWidget.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

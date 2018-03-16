@@ -17,9 +17,10 @@
 #include <QDial>  
 
 
-#include "paintWidget.h"  
-#include "type.h"  
-
+#include "../HCanvas/paintWidget.h"  
+#include "../HCanvas/type.h"  
+#include "../HCanvas/HCanvas.h"  
+#include "../ToolBar/ToolBarWidget.h"
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -27,7 +28,8 @@ public:
 	MainWindow(QWidget *parent = 0);
 	~MainWindow();
 	void keyPressEvent(QKeyEvent *);    //键盘事件  
-	void keyReleaseEvent(QKeyEvent *);  //键盘事件  
+	void keyReleaseEvent(QKeyEvent *);  //键盘事件 
+	virtual QSize sizeHint() const override;//调整窗体的函数  
 signals:
 
 	void openFile_SIGNAL(QString);
@@ -57,12 +59,24 @@ private slots:
 	void draw_polygon();
 	void draw_ellipse();
 	void draw_text();
+
+	void draw_Arrow();
+
+	void draw_Image();
+
 	void reset_dial();      //重置面板  
+
+	void On_Slot_ChangePenStates();
+
+	
 private:
+	HCanvas * m_pCanvas;
 	QLabel * widthLabel;     //显示当前线条大小  
 	QDial *widthDial;
 	QLabel *alphaLabel;     //显示当前透明度  
 	QDial *alphaDial;
-	virtual QSize sizeHint() const override;        //调整窗体的函数  
+
+	CToolBarWidget          *m_pToolBarWidget;      //工具栏窗口
+
 };
 

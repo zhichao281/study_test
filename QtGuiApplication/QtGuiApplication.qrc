@@ -2,4 +2,24 @@
     <qresource prefix="/Image">
         <file>Resources/Image/i_menu_eraser_d.png</file>
     </qresource>
+    <qresource prefix="/CanvasTools">
+        <file>Resources/CanvasTools/i_menu_add.png</file>
+        <file>Resources/CanvasTools/i_menu_cleanup.png</file>
+        <file>Resources/CanvasTools/i_menu_cleanup_sel.png</file>
+        <file>Resources/CanvasTools/i_menu_colour.png</file>
+        <file>Resources/CanvasTools/i_menu_electricity.png</file>
+        <file>Resources/CanvasTools/i_menu_eraser.png</file>
+        <file>Resources/CanvasTools/i_menu_eraser_d.png</file>
+        <file>Resources/CanvasTools/i_menu_eraser_sel.png</file>
+        <file>Resources/CanvasTools/i_menu_flu_no.png</file>
+        <file>Resources/CanvasTools/i_menu_flu_sel.png</file>
+        <file>Resources/CanvasTools/i_menu_fountain_no.png</file>
+        <file>Resources/CanvasTools/i_menu_fountain_sel.png</file>
+        <file>Resources/CanvasTools/i_menu_jihao.png</file>
+        <file>Resources/CanvasTools/i_menu_Marker_no.png</file>
+        <file>Resources/CanvasTools/i_menu_Marker_sel.png</file>
+        <file>Resources/CanvasTools/i_menu_pen.png</file>
+        <file>Resources/CanvasTools/i_menu_sel.png</file>
+        <file>Resources/CanvasTools/i_menu_yingguang.png</file>
+    </qresource>
 </RCC>

@@ -1,9 +1,15 @@
 #include "mainwindows.h"  
 #include <QPixmap>
 #include <QPalette>
+
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
+
+
+	
+
 	///////形状选择框架///////  
 	QToolBar *shapeBar = this->addToolBar("Shape");
 	QActionGroup *shapeGroup = new QActionGroup(shapeBar);
@@ -24,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 	shapeGroup->addAction(act_pen);
 	shapeBar->addAction(act_pen);
 
-	QAction *act_erase = new QAction("erase", shapeBar);
+	QAction *act_erase = new QAction("Erase", shapeBar);
 	act_erase->setCheckable(true);
 	shapeGroup->addAction(act_erase);
 	shapeBar->addAction(act_erase);
@@ -43,6 +49,16 @@ MainWindow::MainWindow(QWidget *parent)
 	act_Text->setCheckable(true);
 	shapeGroup->addAction(act_Text);
 	shapeBar->addAction(act_Text);
+
+	QAction *act_Arrow = new QAction("Arrow", shapeBar);
+	act_Arrow->setCheckable(true);
+	shapeGroup->addAction(act_Arrow);
+	shapeBar->addAction(act_Arrow);
+
+	QAction *act_Image = new QAction("Image", shapeBar);
+	act_Image->setCheckable(true);
+	shapeGroup->addAction(act_Image);
+	shapeBar->addAction(act_Image);
 
 	////////操作选择框架/////////////  
 	QToolBar *operatorBar = this->addToolBar("Operator");
@@ -105,48 +121,55 @@ MainWindow::MainWindow(QWidget *parent)
 	change->addAction(changeWidth);
 
 	////////////paint定义////////////  
-	CPaintWidget *paint = new CPaintWidget(this);
-	setCentralWidget(paint);
-	this->setWindowFlags(Qt::FramelessWindowHint);
+	 m_pCanvas  = new HCanvas(this);
+	setCentralWidget(m_pCanvas);
+	//设置初始颜色及大小
+	m_pToolBarWidget = new CToolBarWidget(m_pCanvas);
+	connect(m_pToolBarWidget, SIGNAL(Sig_ChangePenStates()), this, SLOT(On_Slot_ChangePenStates()));
 
+	//清屏按钮信号槽绑定
+	connect(m_pToolBarWidget, SIGNAL(Sig_EraseBtnClicked()), this, SLOT(On_Slot_EraseBtnClicked()));
 
-
-														 
-														 ////////工具栏信号槽//////////////////  
+	m_pToolBarWidget->show();
+	m_pToolBarWidget->raise();
+	
+														 													 ////////工具栏信号槽//////////////////  
 	QObject::connect(act_rect, SIGNAL(triggered()), this, SLOT(draw_rect()));
 	QObject::connect(act_line, SIGNAL(triggered()), this, SLOT(draw_line()));
 	QObject::connect(act_pen, SIGNAL(triggered()), this, SLOT(draw_pen()));
 	QObject::connect(act_Text, SIGNAL(triggered()), this, SLOT(draw_text()));
+	QObject::connect(act_Arrow, SIGNAL(triggered()), this, SLOT(draw_Arrow()));
+	QObject::connect(act_Image, SIGNAL(triggered()), this, SLOT(draw_Image()));
 
 	
 	QObject::connect(act_erase, SIGNAL(triggered()), this, SLOT(draw_erase()));
 	QObject::connect(act_polygon, SIGNAL(triggered()), this, SLOT(draw_polygon()));
 	QObject::connect(act_ellipse, SIGNAL(triggered()), this, SLOT(draw_ellipse()));
-	QObject::connect(Undo, SIGNAL(triggered()), paint, SLOT(Undo()));
-	QObject::connect(Redo, SIGNAL(triggered()), paint, SLOT(Redo()));
-	QObject::connect(Reset, SIGNAL(triggered()), paint, SLOT(Reset()));
+	QObject::connect(Undo, SIGNAL(triggered()), m_pCanvas, SIGNAL(sig_Undo()));
+	QObject::connect(Redo, SIGNAL(triggered()), m_pCanvas, SIGNAL(sig_Redo()));
+	QObject::connect(Reset, SIGNAL(triggered()), m_pCanvas, SIGNAL(sig_Reset()));
 	QObject::connect(Reset, SIGNAL(triggered()), this, SLOT(reset_dial()));
-	QObject::connect(widthDial, SIGNAL(valueChanged(int)), paint, SLOT(slot_set_penWidth(int)));
+	QObject::connect(widthDial, SIGNAL(valueChanged(int)), m_pCanvas, SIGNAL(sig_set_penSize(int)));
 	QObject::connect(widthDial, SIGNAL(valueChanged(int)), this, SLOT(change_widthLabel(int)));
-	QObject::connect(alphaDial, SIGNAL(valueChanged(int)), paint, SLOT(solt_set_alpha(int)));
+	QObject::connect(alphaDial, SIGNAL(valueChanged(int)), m_pCanvas, SIGNAL(sig_set_brushAlpha(int)));
 	QObject::connect(alphaDial, SIGNAL(valueChanged(int)), this, SLOT(change_alphaLabel(int)));
 
 	////////菜单栏信号槽//////////////////  
-	QObject::connect(newFile, SIGNAL(triggered()), paint, SLOT(Reset()));
-	QObject::connect(openFile, SIGNAL(triggered()), paint, SLOT(open_file()));
-	QObject::connect(saveFile, SIGNAL(triggered()), paint, SLOT(save_file()));
-	QObject::connect(saveAsFile, SIGNAL(triggered()), paint, SLOT(saveAs_file()));
+	QObject::connect(newFile, SIGNAL(triggered()), m_pCanvas, SIGNAL(sig_Reset()));
+	//QObject::connect(openFile, SIGNAL(triggered()), paint, SLOT(open_file()));
+	//QObject::connect(saveFile, SIGNAL(triggered()), paint, SLOT(save_file()));
+	//QObject::connect(saveAsFile, SIGNAL(triggered()), paint, SLOT(saveAs_file()));
 	QObject::connect(quit, SIGNAL(triggered()), this, SLOT(close()));
 	QObject::connect(changeColor, SIGNAL(triggered()), this, SLOT(color_SLOT()));
 	QObject::connect(changeBrush, SIGNAL(triggered()), this, SLOT(brush_SLOT()));
 	QObject::connect(changeWidth, SIGNAL(triggered()), this, SLOT(width_SLOT()));
 
 	/////////Paint交互信号槽///////////////////  
-	QObject::connect(this, SIGNAL(select_shape(DRAW_TYPE)), paint, SLOT(slot_set_shape(DRAW_TYPE)));
-	QObject::connect(this, SIGNAL(color_change(QColor)), paint, SLOT(slot_set_penColor(QColor)));
-	QObject::connect(this, SIGNAL(brush_change(QColor)), paint, SLOT(slot_set_brushColor(QColor)));
-	QObject::connect(this, SIGNAL(width_change(int)), paint, SLOT(slot_set_penWidth(int)));
-	QObject::connect(this, SIGNAL(change_straight(bool)), paint, SLOT(slot_set_straight(bool)));
+	QObject::connect(this, SIGNAL(select_shape(DRAW_TYPE)), m_pCanvas, SIGNAL(sig_set_shape(DRAW_TYPE)));
+	QObject::connect(this, SIGNAL(color_change(QColor)), m_pCanvas, SIGNAL(sig_set_penColor(QColor)));
+	QObject::connect(this, SIGNAL(brush_change(QColor)), m_pCanvas, SIGNAL(sig_set_brushColor(QColor)));
+	QObject::connect(this, SIGNAL(width_change(int)), m_pCanvas, SIGNAL(sig_set_penSize(int)));
+	QObject::connect(this, SIGNAL(change_straight(bool)), m_pCanvas, SIGNAL(sig_change_straight(bool)));
 }
 
 ///////信息发射///////////////  
@@ -192,6 +215,22 @@ void MainWindow::draw_line()
 {
 	emit select_shape(Draw_Line);
 }
+void MainWindow::draw_Image()
+{
+	QString path = QFileDialog::getOpenFileName(this, tr("Open Image"), ".", tr("Image Files(*.jpg *.png)"));
+	if (path.length() == 0)
+	{
+		QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
+	}
+
+
+	else 
+	{
+		m_pCanvas->setBackgroundImage(path);
+		//QMessageBox::information(NULL, tr("Path"), tr("You selected ") + path);
+	}
+
+}
 void MainWindow::draw_pen()
 {
 	emit select_shape(Draw_Pen);
@@ -215,6 +254,46 @@ void MainWindow::draw_text()
 	emit select_shape(Draw_Text);
 	
 }
+void MainWindow::draw_Arrow()
+{
+	emit select_shape(Draw_Arrow);
+
+}
+
+
+
+/**
+* @brief 画笔的样式改变
+*/
+void MainWindow::On_Slot_ChangePenStates()
+{
+	int nPenType, nPenSize;
+	QColor pPenColor;
+	Qt::PenCapStyle PenCapstyle;
+	m_pToolBarWidget->GetPenData(nPenType, nPenSize, pPenColor, PenCapstyle);
+	
+	emit select_shape((DRAW_TYPE)nPenType);
+
+	emit m_pCanvas->sig_set_penColor(pPenColor);
+
+	if ((DRAW_TYPE)nPenType == DRAW_TYPE::Draw_Erase)
+	{
+		emit m_pCanvas->sig_set_EraseSize(nPenSize);
+	}
+	else
+	{
+		emit m_pCanvas->sig_set_penSize(nPenSize);
+	}
+
+
+	
+
+}
+
+
+
+
+
 ///////////////////槽函数////////////////  
 void MainWindow::change_widthLabel(int w)
 {
