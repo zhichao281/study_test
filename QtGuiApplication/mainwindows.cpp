@@ -1,14 +1,16 @@
 #include "mainwindows.h"  
 #include <QPixmap>
 #include <QPalette>
-
-
+#include "CToolTip.h"
+#include "ItemWidget.h"
+CToolTip *g_toolTip;
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 
+	ctoolTip = new CToolTip();
+	g_toolTip = ctoolTip;
 
-	
 
 	///////ÐÎ×´Ñ¡Ôñ¿ò¼Ü///////  
 	QToolBar *shapeBar = this->addToolBar("Shape");

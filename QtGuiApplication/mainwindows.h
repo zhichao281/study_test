@@ -16,11 +16,14 @@
 #include <QMenu>  
 #include <QDial>  
 
+class CToolTip;
+
 
 #include "../HCanvas/paintWidget.h"  
 #include "../HCanvas/type.h"  
 #include "../HCanvas/HCanvas.h"  
 #include "../ToolBar/ToolBarWidget.h"
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -77,6 +80,6 @@ private:
 	QDial *alphaDial;
 
 	CToolBarWidget          *m_pToolBarWidget;      //¹¤¾ßÀ¸´°¿Ú
-
+	CToolTip *ctoolTip;
 };
 
