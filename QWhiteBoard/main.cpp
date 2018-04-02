@@ -13,5 +13,5 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /*lpvReserved*/)
 
 	return TRUE;
 }
-2222
-这个是错误2
+
+201804/02  - 测试1
